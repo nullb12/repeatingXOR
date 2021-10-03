@@ -14,7 +14,7 @@ def deci_to_binary(decimal, bin_length=4):
     while len(bin_shell) < bin_length:
         bin_shell += bytes(str(0), 'ascii')
 
-#calculates the number of differing bits between two equal bytestrings
+# calculates the number of differing bits between two equal bytestrings
 def hamming_dist(h_block1, h_block2):
     dist = 0
     for byte1, byte2 in zip(h_block1, h_block2):
@@ -24,7 +24,7 @@ def hamming_dist(h_block1, h_block2):
                 dist += 1
     return dist
 
-#Finds most probable keysizes for the XOR key
+# Finds most probable keysizes for the XOR key
 def find_keys(ciphertext, min_keysize, max_keysize):
     hamming_dict = {}
     for keysize in range(min_keysize, max_keysize):
@@ -35,7 +35,7 @@ def find_keys(ciphertext, min_keysize, max_keysize):
         while n * max_keysize <= len(ciphertext):
             chunk1, chunk2 = ciphertext[(n - 1) * keysize:n * keysize], ciphertext[n * keysize:(n + 1) * keysize]
             n += 1
-             #normalize each hamming distance
+             # normalize each hamming distance
             distances.append(hamming_dist(chunk1, chunk2) / keysize)
         # finds the average normalized hamming distance for the keysize
         hamming_dict[keysize] = (sum(distances) / len(distances))
@@ -59,7 +59,7 @@ def transpose_block(blocks):
 
     return transposed_blocks
 
-#Decodes a chunk of the ciphertext with a single-byte XOR
+# Decodes a chunk of the ciphertext with a single-byte XOR
 def single_char_xor(ciphertext):
     plaintexts = []
     #Iterates through all printable ASCII characters
@@ -82,7 +82,7 @@ def solve_block(blocklist):
         xor_key_bytes.append(xor_byte)
     return xor_key_bytes
 
-#joins key bytes as a single string
+# joins key bytes as a single string
 def key_combinations(key_bytes):
     output = ''
     for key_byte in key_bytes:
