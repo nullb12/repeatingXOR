@@ -99,7 +99,8 @@ def main():
     print('transposes', t)
     print()
     print('Possible key:', key_combinations(possible_key))
-
+    fh.close()
+    
 if __name__ == '__main__':
     main()
-    fh.close()
+    
