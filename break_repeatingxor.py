@@ -10,6 +10,7 @@ def deci_to_binary(decimal, bin_length=4):
         bin_shell += dec_bit
     while len(bin_shell) < bin_length:
         bin_shell += bytes(str(0), 'ascii')
+    return bin_shell
 
 # calculates the number of differing bits between two equal bytestrings
 def hamming_dist(h_block1, h_block2):
@@ -72,7 +73,7 @@ def solve_block(blocklist):
         # decodes XOR, finds the plaintexts with the highest frequencies of common english letters
         xor_byte = []
         transpose_xor = single_char_xor(block)
-        best = cryptopals3prime.grade_plaintexts3(transpose_xor)
+        best = singlexor.grade_plaintexts3(transpose_xor)
         for i in list(best):
             x = chr(transpose_xor.index(i))
             xor_byte.append(x)
