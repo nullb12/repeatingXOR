@@ -1,7 +1,6 @@
 import base64
 import singlexor
 
-
 def deci_to_binary(decimal, bin_length=4):
     bin_shell = b''
     while decimal > 0:
