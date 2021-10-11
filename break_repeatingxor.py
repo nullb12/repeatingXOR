@@ -105,7 +105,7 @@ def main():
     t = transpose_block(chunks)
     possible_key = solve_block(t)
     found_plaintext = xor_decrypt(decoded_ciphertext, key_combinations(possible_key))
-    print('Guessed key:', key_combinations(possible_key), end='\n\n')
+    print('\nGuessed key:', key_combinations(possible_key), end='\n\n')
     print('Plaintext: ', end='\n\n')
     print(found_plaintext)
     fh.close()
