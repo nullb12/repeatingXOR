@@ -1,9 +1,6 @@
 import base64
 import singlexor
 
-fh = open('7.txt', 'r')
-decoded_ciphertext = base64.b64decode(fh.read().encode())
-key_sizes = []
 
 def deci_to_binary(decimal, bin_length=4):
     bin_shell = b''
@@ -91,6 +88,10 @@ def key_combinations(key_bytes):
     return output
 
 def main():
+    in_file = input('Please input your encoded XORd file (with extension): ')
+    fh = open(in_file, 'r')
+    decoded_ciphertext = base64.b64decode(fh.read().encode())
+    key_sizes = []
     keysize = find_keys(decoded_ciphertext, 2, 20)[0][0]
     chunks = break_txt(decoded_ciphertext, keysize)
     t = transpose_block(chunks)
