@@ -88,6 +88,13 @@ def key_combinations(key_bytes):
             output += char
     return output
 
+def xor_decrypt(message, key):
+    message, key = message, key.encode()
+    extended_key = key * (len(message) // len(key))
+    extended_key += key[:len(message) % len(key)]
+    output = [chr(i ^ j) for i, j in zip(message, extended_key)]
+    return "".join(output)
+
 def main():
     in_file = input('Please input your encoded XORd file (with extension): ')
     fh = open(in_file, 'r')
@@ -97,10 +104,10 @@ def main():
     chunks = break_txt(decoded_ciphertext, keysize)
     t = transpose_block(chunks)
     possible_key = solve_block(t)
-    print('broken text', chunks)
-    print('transposes', t)
-    print()
-    print('Possible key:', key_combinations(possible_key))
+    found_plaintext = xor_decrypt(decoded_ciphertext, key_combinations(possible_key))
+    print('Guessed key:', key_combinations(possible_key), end='\n\n')
+    print('Plaintext: ', end='\n\n')
+    print(found_plaintext)
     fh.close()
     
 if __name__ == '__main__':
