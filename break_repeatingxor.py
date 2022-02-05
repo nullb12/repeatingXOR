@@ -30,7 +30,7 @@ def find_keys(ciphertext, min_keysize, max_keysize):
         # iterates through adjacent chunks of ciphertext, keysize chars apart 
         # (ex) ciphertext = abcdefghijk, keysize=2: ab|cd, cd|ef, ef|gh ...        
         while n * max_keysize <= len(ciphertext):
-            chunk1, chunk2 = ciphertext[(n - 1) * keysize:n * keysize], ciphertext[n * keysize:(n + 1) * keysize]
+            chunk1, chunk2 = ciphertext[(n-1) * keysize:n * keysize], ciphertext[n * keysize:(n+1) * keysize]
             n += 1
              # normalize each hamming distance
             distances.append(hamming_dist(chunk1, chunk2) / keysize)
